@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.runtm.com)",
+      "Read(//c/Users/samna/OneDrive/Desktop/**)",
+      "Bash(npx create-next-app@latest teamflix --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-git)",
+      "Bash(npm install *)",
+      "Bash(npx next *)"
+    ]
+  }
+}
