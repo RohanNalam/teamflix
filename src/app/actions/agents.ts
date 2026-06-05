@@ -18,15 +18,24 @@ export async function getAgents() {
 export async function connectAgent(name: string, provider: string) {
   const { userId } = await auth()
   if (!userId) return
-  await supabase.from('agents').upsert({
-    user_id: userId, name, provider, status: 'connected', sessions: 0
-  }, { onConflict: 'user_id,name' })
+  await supabase.from('agents').upsert(
+    { user_id: userId, name, provider, status: 'connected', sessions: 0 },
+    { onConflict: 'user_id,name' }
+  )
+  await supabase.from('activity').insert({
+    user_id: userId, type: 'run',
+    message: `Agent connected: ${name}`, agent: name
+  })
   revalidatePath('/dashboard/agents')
 }
 
-export async function disconnectAgent(id: string) {
+export async function disconnectAgent(id: string, name: string) {
   const { userId } = await auth()
   if (!userId) return
   await supabase.from('agents').update({ status: 'disconnected' }).eq('id', id).eq('user_id', userId)
+  await supabase.from('activity').insert({
+    user_id: userId, type: 'run',
+    message: `Agent disconnected: ${name}`, agent: name
+  })
   revalidatePath('/dashboard/agents')
 }

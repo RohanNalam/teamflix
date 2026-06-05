@@ -34,9 +34,9 @@ export default function SessionsClient({ initialSessions }: { initialSessions: a
     })
   }
 
-  const handleDelete = (id: string) => {
+  const handleDelete = (id: string, name: string) => {
     startTransition(async () => {
-      await deleteSession(id)
+      await deleteSession(id, name)
       setSessions(prev => prev.filter(s => s.id !== id))
     })
   }
@@ -115,7 +115,7 @@ export default function SessionsClient({ initialSessions }: { initialSessions: a
                       </span>
                     </td>
                     <td className="px-5 py-4">
-                      <button onClick={() => handleDelete(s.id)} className="p-1.5 rounded-lg hover:bg-red-500/10 transition-colors group">
+                      <button onClick={() => handleDelete(s.id, s.name)} className="p-1.5 rounded-lg hover:bg-red-500/10 transition-colors group">
                         <Trash2 size={14} className="group-hover:text-red-400" style={{ color: 'var(--muted)' }} />
                       </button>
                     </td>
