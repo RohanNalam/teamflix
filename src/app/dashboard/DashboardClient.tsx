@@ -1,10 +1,9 @@
 'use client'
 
-import { useState, useTransition, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { ArrowUp, GitBranch, Layers, Globe, Code2, Zap, Database, LayoutDashboard } from 'lucide-react'
+import { ArrowUp, GitBranch, Layers, Globe, Code2, Zap, Database, LayoutDashboard, Loader2 } from 'lucide-react'
 import { createSession } from '@/app/actions/sessions'
-import { useToast } from '@/components/Toast'
 
 const QUICK_PROMPTS = [
   { icon: Globe, label: 'Build a landing page' },
@@ -22,8 +21,7 @@ export default function DashboardClient({ firstName, sessionCount, agentCount }:
 }) {
   const [prompt, setPrompt] = useState('')
   const [selectedAgent, setSelectedAgent] = useState(AGENTS[0])
-  const [isPending, startTransition] = useTransition()
-  const { toast } = useToast()
+  const [loading, setLoading] = useState(false)
   const router = useRouter()
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
@@ -34,17 +32,20 @@ export default function DashboardClient({ firstName, sessionCount, agentCount }:
     }
   }, [prompt])
 
-  const handleSubmit = () => {
-    if (!prompt.trim()) return
-    const sessionName = prompt.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 40).replace(/-$/, '')
-    startTransition(async () => {
+  const handleSubmit = async () => {
+    if (!prompt.trim() || loading) return
+    setLoading(true)
+    try {
+      const sessionName = prompt.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 40).replace(/-$/, '')
       const session = await createSession(sessionName, selectedAgent, '', prompt.trim())
       if (session?.id) {
         router.push(`/dashboard/sessions/${session.id}`)
       } else {
         router.push('/dashboard/sessions')
       }
-    })
+    } catch (e) {
+      setLoading(false)
+    }
   }
 
   const handleKey = (e: React.KeyboardEvent) => {
@@ -116,11 +117,14 @@ export default function DashboardClient({ firstName, sessionCount, agentCount }:
             <span className="text-[10px]" style={{ color: 'var(--muted)' }}>↵ to send · ⇧↵ new line</span>
             <button
               onClick={handleSubmit}
-              disabled={!prompt.trim() || isPending}
+              disabled={!prompt.trim() || loading}
               className="w-7 h-7 rounded-lg flex items-center justify-center transition-opacity hover:opacity-80 disabled:opacity-30"
               style={{ background: 'var(--accent)' }}
             >
-              <ArrowUp size={14} color="#1a1910" />
+              {loading
+                ? <Loader2 size={13} color="#1a1910" className="animate-spin" />
+                : <ArrowUp size={14} color="#1a1910" />
+              }
             </button>
           </div>
         </div>
@@ -137,7 +141,7 @@ export default function DashboardClient({ firstName, sessionCount, agentCount }:
       <button
         className="w-full max-w-2xl flex items-center gap-4 px-5 py-4 rounded-2xl border text-sm font-medium transition-all hover:border-[#878672]"
         style={{ background: 'var(--surface)', borderColor: 'var(--border)', color: 'var(--foreground)' }}
-        onClick={() => toast('GitHub import coming soon', 'error')}
+        onClick={() => alert('GitHub import coming soon')}
       >
         <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: 'var(--surface-2)' }}>
           <GitBranch size={18} style={{ color: 'var(--muted)' }} />
