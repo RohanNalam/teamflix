@@ -89,7 +89,7 @@ export default function SessionView({ sessionId }: { sessionId: string }) {
       const { data, error } = await supabase.from('sessions').select('*').eq('id', sessionId).single()
       if (data) {
         setSession(data)
-        const userPrompt = data.prompt || data.name
+        const userPrompt = data.prompt || data.repo || data.name
         setPrompt(userPrompt)
         await runAgent(userPrompt, data.agent, true)
       } else {

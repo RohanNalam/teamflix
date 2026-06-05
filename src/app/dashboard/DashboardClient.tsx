@@ -44,9 +44,8 @@ export default function DashboardClient({ firstName, sessionCount, agentCount }:
           user_id: DEMO_USER_ID,
           name: sessionName,
           agent: selectedAgent,
-          repo: '',
+          repo: prompt.trim(), // store full prompt in repo field temporarily
           status: 'active',
-          prompt: prompt.trim(),
         })
         .select()
         .single()
