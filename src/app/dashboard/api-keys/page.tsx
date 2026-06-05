@@ -25,7 +25,7 @@ export default function ApiKeysPage() {
           <h1 className="text-xl font-semibold mb-1" style={{ color: 'var(--foreground)' }}>API Keys</h1>
           <p className="text-sm" style={{ color: 'var(--muted)' }}>Use these keys to authenticate with the Teamflix API.</p>
         </div>
-        <button className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-black hover:opacity-90 transition-opacity" style={{ background: 'var(--orange)' }}>
+        <button className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-black hover:opacity-90 transition-opacity" style={{ background: 'var(--accent)' }}>
           <Plus size={14} />
           New Key
         </button>
@@ -70,7 +70,7 @@ export default function ApiKeysPage() {
         </table>
       </div>
 
-      <div className="rounded-xl border p-5" style={{ borderColor: '#f9731630', background: '#f9731608' }}>
+      <div className="rounded-xl border p-5" style={{ borderColor: 'var(--accent)30', background: 'var(--accent)08' }}>
         <h3 className="text-sm font-semibold mb-2" style={{ color: 'var(--foreground)' }}>Using the API</h3>
         <p className="text-xs mb-3" style={{ color: 'var(--muted)' }}>Include your API key as a Bearer token in the Authorization header:</p>
         <pre className="text-xs rounded-lg p-3 overflow-x-auto font-mono" style={{ background: 'var(--surface-2)', color: '#ccc' }}>

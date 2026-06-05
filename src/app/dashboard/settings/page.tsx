@@ -21,7 +21,7 @@ export default async function SettingsPage() {
             {user?.imageUrl ? (
               <img src={user.imageUrl} alt="" className="w-12 h-12 rounded-full object-cover" />
             ) : (
-              <div className="w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold" style={{ background: 'var(--orange)', color: '#000' }}>
+              <div className="w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold" style={{ background: 'var(--accent)', color: '#1a1910' }}>
                 {initials}
               </div>
             )}
@@ -40,7 +40,7 @@ export default async function SettingsPage() {
             <p className="text-[10px] mt-1" style={{ color: 'var(--muted)' }}>Email is managed by your sign-in provider.</p>
           </div>
           <div className="flex justify-end pt-2">
-            <button className="px-4 py-2 rounded-lg text-sm font-medium text-black hover:opacity-90 transition-opacity" style={{ background: 'var(--orange)' }}>Save Changes</button>
+            <button className="px-4 py-2 rounded-lg text-sm font-medium text-black hover:opacity-90 transition-opacity" style={{ background: 'var(--accent)' }}>Save Changes</button>
           </div>
         </div>
       </section>
@@ -62,7 +62,7 @@ export default async function SettingsPage() {
             </select>
           </div>
           <div className="flex justify-end pt-2">
-            <button className="px-4 py-2 rounded-lg text-sm font-medium text-black hover:opacity-90 transition-opacity" style={{ background: 'var(--orange)' }}>Save</button>
+            <button className="px-4 py-2 rounded-lg text-sm font-medium text-black hover:opacity-90 transition-opacity" style={{ background: 'var(--accent)' }}>Save</button>
           </div>
         </div>
       </section>

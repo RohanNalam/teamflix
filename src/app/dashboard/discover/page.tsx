@@ -36,7 +36,7 @@ export default function DiscoverPage() {
         {categories.map((c, i) => (
           <button key={c} className="px-3 py-1 rounded-full text-xs font-medium border transition-colors"
             style={i === 0
-              ? { background: 'var(--orange)', color: '#000', borderColor: 'var(--orange)' }
+              ? { background: 'var(--accent)', color: '#1a1910', borderColor: 'var(--accent)' }
               : { background: 'transparent', color: 'var(--muted)', borderColor: 'var(--border)' }
             }>
             {c}
@@ -46,9 +46,9 @@ export default function DiscoverPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {templates.map(t => (
-          <div key={t.title} className="rounded-xl border p-5 hover:border-orange-500/30 transition-colors group" style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}>
+          <div key={t.title} className="rounded-xl border p-5 hover:border-[#878672]/30 transition-colors group" style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}>
             <div className="flex items-center justify-between mb-3">
-              <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full" style={{ background: '#f9731618', color: 'var(--orange)' }}>{t.category}</span>
+              <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full" style={{ background: 'var(--accent)18', color: 'var(--accent)' }}>{t.category}</span>
               <button className="opacity-0 group-hover:opacity-100 transition-opacity">
                 <Bookmark size={13} style={{ color: 'var(--muted)' }} />
               </button>
@@ -57,7 +57,7 @@ export default function DiscoverPage() {
             <p className="text-xs leading-relaxed mb-4" style={{ color: 'var(--muted)' }}>{t.description}</p>
             <div className="flex items-center justify-between">
               <span className="text-xs" style={{ color: 'var(--muted)' }}>★ {t.stars}</span>
-              <button className="text-xs px-3 py-1 rounded font-medium text-black hover:opacity-90 transition-opacity" style={{ background: 'var(--orange)' }}>Use</button>
+              <button className="text-xs px-3 py-1 rounded font-medium text-black hover:opacity-90 transition-opacity" style={{ background: 'var(--accent)' }}>Use</button>
             </div>
           </div>
         ))}

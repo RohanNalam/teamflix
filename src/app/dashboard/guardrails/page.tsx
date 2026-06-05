@@ -12,7 +12,7 @@ const defaultRules = [
 
 const severityColor: Record<string, string> = {
   high: '#ef4444',
-  medium: '#f97316',
+  medium: 'var(--accent)',
   low: '#6b7280',
 }
 
@@ -30,7 +30,7 @@ export default function GuardrailsPage() {
 
       <div className="space-y-3">
         {rules.map(rule => (
-          <div key={rule.id} className="rounded-xl border p-5 flex items-center gap-4 transition-colors hover:border-orange-500/20" style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}>
+          <div key={rule.id} className="rounded-xl border p-5 flex items-center gap-4 transition-colors hover:border-[#878672]/20" style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}>
             <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: 'var(--surface-2)' }}>
               {rule.severity === 'high'
                 ? <AlertTriangle size={15} style={{ color: severityColor[rule.severity] }} />
@@ -48,7 +48,7 @@ export default function GuardrailsPage() {
             <button
               onClick={() => toggle(rule.id)}
               className="relative w-9 h-5 rounded-full transition-colors flex-shrink-0"
-              style={{ background: rule.enabled ? 'var(--orange)' : 'var(--border)' }}
+              style={{ background: rule.enabled ? 'var(--accent)' : 'var(--border)' }}
             >
               <span
                 className="absolute top-0.5 w-4 h-4 rounded-full transition-transform"

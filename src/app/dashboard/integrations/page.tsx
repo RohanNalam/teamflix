@@ -19,7 +19,7 @@ export default function IntegrationsPage() {
           <h1 className="text-xl font-semibold mb-1" style={{ color: 'var(--foreground)' }}>Integrations</h1>
           <p className="text-sm" style={{ color: 'var(--muted)' }}>Connect your tools to give agents the right context.</p>
         </div>
-        <button className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-black hover:opacity-90 transition-opacity" style={{ background: 'var(--orange)' }}>
+        <button className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-black hover:opacity-90 transition-opacity" style={{ background: 'var(--accent)' }}>
           <Plus size={14} />
           Request Integration
         </button>
@@ -27,7 +27,7 @@ export default function IntegrationsPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {integrations.map(int => (
-          <div key={int.name} className="rounded-xl border p-5 hover:border-orange-500/20 transition-colors" style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}>
+          <div key={int.name} className="rounded-xl border p-5 hover:border-[#878672]/20 transition-colors" style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}>
             <div className="flex items-start justify-between mb-3">
               <span className="text-2xl">{int.icon}</span>
               {int.connected && <CheckCircle2 size={15} style={{ color: '#22c55e' }} />}
@@ -37,7 +37,7 @@ export default function IntegrationsPage() {
             <button className={`text-xs px-3 py-1.5 rounded font-medium transition-opacity hover:opacity-90 w-full ${int.connected ? 'border' : 'text-black'}`}
               style={int.connected
                 ? { borderColor: 'var(--border)', color: 'var(--muted)', background: 'transparent' }
-                : { background: 'var(--orange)' }
+                : { background: 'var(--accent)' }
               }>
               {int.connected ? 'Manage' : 'Connect'}
             </button>

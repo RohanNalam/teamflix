@@ -15,15 +15,15 @@ export default function ContextPage() {
           <h1 className="text-xl font-semibold mb-1" style={{ color: 'var(--foreground)' }}>Context</h1>
           <p className="text-sm" style={{ color: 'var(--muted)' }}>Files and instructions injected into every agent session.</p>
         </div>
-        <button className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-black hover:opacity-90 transition-opacity" style={{ background: 'var(--orange)' }}>
+        <button className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-black hover:opacity-90 transition-opacity" style={{ background: 'var(--accent)' }}>
           <Plus size={14} />
           Add File
         </button>
       </div>
 
       {/* Info banner */}
-      <div className="rounded-xl border p-4 mb-6 flex items-start gap-3" style={{ borderColor: '#f9731630', background: '#f9731608' }}>
-        <FileText size={15} style={{ color: 'var(--orange)', marginTop: 1 }} />
+      <div className="rounded-xl border p-4 mb-6 flex items-start gap-3" style={{ borderColor: 'var(--accent)30', background: 'var(--accent)08' }}>
+        <FileText size={15} style={{ color: 'var(--accent)', marginTop: 1 }} />
         <p className="text-sm leading-relaxed" style={{ color: '#ccc' }}>
           Context files are automatically prepended to every agent session. Use them to share coding standards, architecture decisions, and project-specific instructions.
         </p>
@@ -42,7 +42,7 @@ export default function ContextPage() {
             {contextFiles.map((f, i) => (
               <tr key={f.name} className="hover:bg-white/3 transition-colors" style={i < contextFiles.length - 1 ? { borderBottom: '1px solid var(--border)' } : {}}>
                 <td className="px-4 py-3 font-mono text-xs font-medium flex items-center gap-2" style={{ color: 'var(--foreground)' }}>
-                  <FileText size={13} style={{ color: 'var(--orange)' }} />{f.name}
+                  <FileText size={13} style={{ color: 'var(--accent)' }} />{f.name}
                 </td>
                 <td className="px-4 py-3 text-xs" style={{ color: 'var(--muted)' }}>{f.type}</td>
                 <td className="px-4 py-3 text-xs" style={{ color: 'var(--muted)' }}>{f.size}</td>
@@ -71,7 +71,7 @@ export default function ContextPage() {
           style={{ background: 'var(--surface)', borderColor: 'var(--border)', color: 'var(--foreground)' }}
         />
         <div className="flex justify-end mt-2">
-          <button className="px-4 py-2 rounded-lg text-sm font-medium text-black hover:opacity-90 transition-opacity" style={{ background: 'var(--orange)' }}>Save</button>
+          <button className="px-4 py-2 rounded-lg text-sm font-medium text-black hover:opacity-90 transition-opacity" style={{ background: 'var(--accent)' }}>Save</button>
         </div>
       </div>
     </div>
