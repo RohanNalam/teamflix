@@ -8,7 +8,8 @@
       "Bash(npx next *)",
       "Bash(git commit *)",
       "Bash(git push *)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(Remove-Item \"C:\\\\Users\\\\samna\\\\OneDrive\\\\Desktop\\\\teamflix\\\\src\\\\middleware.ts\")"
     ]
   }
 }
