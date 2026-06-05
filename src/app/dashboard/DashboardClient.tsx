@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { ArrowUp, GitBranch, Layers, Globe, Code2, Zap, Database, LayoutDashboard, Loader2 } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
-import { DEMO_USER_ID } from '@/lib/demo-user'
+import { getDeviceId } from '@/lib/device-id'
 
 const QUICK_PROMPTS = [
   { icon: Globe, label: 'Build a landing page' },
@@ -15,7 +15,7 @@ const QUICK_PROMPTS = [
 
 const AGENTS = ['Claude Code', 'Cursor', 'OpenAI Codex', 'GitHub Copilot']
 
-export default function DashboardClient({ firstName, sessionCount, agentCount }: {
+export default function DashboardClient({ firstName: _firstName, sessionCount: _sc, agentCount: _ac }: {
   firstName: string
   sessionCount: number
   agentCount: number
@@ -23,8 +23,17 @@ export default function DashboardClient({ firstName, sessionCount, agentCount }:
   const [prompt, setPrompt] = useState('')
   const [selectedAgent, setSelectedAgent] = useState(AGENTS[0])
   const [loading, setLoading] = useState(false)
+  const [sessionCount, setSessionCount] = useState(0)
   const router = useRouter()
   const textareaRef = useRef<HTMLTextAreaElement>(null)
+
+  useEffect(() => {
+    async function loadStats() {
+      const { count } = await supabase.from('sessions').select('id', { count: 'exact' }).eq('user_id', getDeviceId())
+      setSessionCount(count ?? 0)
+    }
+    loadStats()
+  }, [])
 
   useEffect(() => {
     if (textareaRef.current) {
@@ -41,7 +50,7 @@ export default function DashboardClient({ firstName, sessionCount, agentCount }:
       const { data, error } = await supabase
         .from('sessions')
         .insert({
-          user_id: DEMO_USER_ID,
+          user_id: getDeviceId(),
           name: sessionName,
           agent: selectedAgent,
           repo: prompt.trim(), // store full prompt in repo field temporarily
@@ -85,7 +94,7 @@ export default function DashboardClient({ firstName, sessionCount, agentCount }:
       </div>
 
       <h1 className="font-bold text-3xl mb-8 text-center" style={{ color: 'var(--foreground)', letterSpacing: '-0.5px' }}>
-        What are you building, {firstName}?
+        What are you building today?
       </h1>
 
       {/* Quick prompts */}
@@ -168,18 +177,11 @@ export default function DashboardClient({ firstName, sessionCount, agentCount }:
       </button>
 
       {/* Stats if they have data */}
-      {(sessionCount > 0 || agentCount > 0) && (
+      {sessionCount > 0 && (
         <div className="flex items-center gap-6 mt-8">
-          {sessionCount > 0 && (
-            <span className="text-xs" style={{ color: 'var(--muted)' }}>
-              <span className="font-semibold" style={{ color: 'var(--foreground)' }}>{sessionCount}</span> session{sessionCount !== 1 ? 's' : ''}
-            </span>
-          )}
-          {agentCount > 0 && (
-            <span className="text-xs" style={{ color: 'var(--muted)' }}>
-              <span className="font-semibold" style={{ color: 'var(--foreground)' }}>{agentCount}</span> agent{agentCount !== 1 ? 's' : ''} connected
-            </span>
-          )}
+          <span className="text-xs" style={{ color: 'var(--muted)' }}>
+            <span className="font-semibold" style={{ color: 'var(--foreground)' }}>{sessionCount}</span> session{sessionCount !== 1 ? 's' : ''} in your workspace
+          </span>
         </div>
       )}
     </div>

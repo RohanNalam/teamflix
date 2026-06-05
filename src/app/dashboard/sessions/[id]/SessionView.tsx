@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from 'react'
 import { ArrowLeft, Bot, Terminal, Copy, Check, Loader2, Circle, Send } from 'lucide-react'
 import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
-import { DEMO_USER_ID } from '@/lib/demo-user'
+import { getDeviceId } from '@/lib/device-id'
 
 function CodeBlock({ code, lang }: { code: string; lang: string }) {
   const [copied, setCopied] = useState(false)
