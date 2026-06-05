@@ -1,5 +1,6 @@
 import SessionView from './SessionView'
 
-export default function SessionPage({ params }: { params: { id: string } }) {
-  return <SessionView sessionId={params.id} />
+export default async function SessionPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  return <SessionView sessionId={id} />
 }
