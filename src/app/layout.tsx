@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { ClerkProvider } from '@clerk/nextjs'
 import { ToastProvider } from '@/components/Toast'
 import "./globals.css";
 
@@ -16,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Teamflix — AI agents for every team",
-  description: "Deploy sandboxed AI coding agents across your team with full observability, guardrails, and integrations.",
+  description: "Deploy sandboxed AI coding agents across your team with full observability, guardrails, and visibility.",
 };
 
 export default function RootLayout({
@@ -25,13 +24,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <html
-        lang="en"
-        className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-      >
-        <body className="min-h-full flex flex-col"><ToastProvider>{children}</ToastProvider></body>
-      </html>
-    </ClerkProvider>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+      <body className="min-h-full flex flex-col">
+        <ToastProvider>{children}</ToastProvider>
+      </body>
+    </html>
   );
 }

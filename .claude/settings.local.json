@@ -9,7 +9,9 @@
       "Bash(git commit *)",
       "Bash(git push *)",
       "Bash(git add *)",
-      "Bash(Remove-Item \"C:\\\\Users\\\\samna\\\\OneDrive\\\\Desktop\\\\teamflix\\\\src\\\\middleware.ts\")"
+      "Bash(Remove-Item \"C:\\\\Users\\\\samna\\\\OneDrive\\\\Desktop\\\\teamflix\\\\src\\\\middleware.ts\")",
+      "PowerShell(npm uninstall @clerk/nextjs --prefix \"C:\\\\Users\\\\samna\\\\OneDrive\\\\Desktop\\\\teamflix\" 2>&1)",
+      "PowerShell(tail -3)"
     ]
   }
 }

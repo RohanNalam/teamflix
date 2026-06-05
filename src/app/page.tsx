@@ -30,11 +30,8 @@ export default function LandingPage() {
             <Link href="#agents" className="hover:text-[#FDFBD4] transition-colors">Integrations</Link>
           </div>
           <div className="flex items-center gap-3">
-            <Link href="/sign-in" className="text-sm font-medium px-4 py-2 rounded-lg border hover:bg-white/5 transition-colors" style={{ borderColor: 'var(--border)', color: 'var(--muted)' }}>
-              Sign in
-            </Link>
-            <Link href="/sign-up" className="text-sm font-semibold px-4 py-2 rounded-lg transition-opacity hover:opacity-80" style={{ background: 'var(--accent)', color: '#1a1910' }}>
-              Get started free
+            <Link href="/dashboard" className="text-sm font-semibold px-4 py-2 rounded-lg transition-opacity hover:opacity-80" style={{ background: 'var(--accent)', color: '#1a1910' }}>
+              Open app
             </Link>
           </div>
         </div>
@@ -50,11 +47,8 @@ export default function LandingPage() {
           Teamflix gives every department their own AI coding agents — with the guardrails, context, and visibility your team actually needs.
         </p>
         <div className="flex items-center justify-center gap-4 flex-wrap mb-10">
-          <Link href="/sign-up" className="flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-base transition-opacity hover:opacity-80" style={{ background: 'var(--accent)', color: '#1a1910' }}>
-            Get started <ArrowRight size={16} />
-          </Link>
-          <Link href="/sign-in" className="flex items-center gap-2 px-7 py-3.5 rounded-xl font-medium text-base border hover:bg-white/5 transition-colors" style={{ borderColor: 'var(--border)', color: 'var(--muted)' }}>
-            Sign in
+          <Link href="/dashboard" className="flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-base transition-opacity hover:opacity-80" style={{ background: 'var(--accent)', color: '#1a1910' }}>
+            Open app <ArrowRight size={16} />
           </Link>
         </div>
         <div className="flex items-center justify-center gap-6 flex-wrap">
@@ -107,8 +101,8 @@ export default function LandingPage() {
           <p className="text-base mb-10 max-w-md mx-auto" style={{ color: 'var(--muted)' }}>
             Create an account and start running AI agents across your team today. No credit card required.
           </p>
-          <Link href="/sign-up" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-base transition-opacity hover:opacity-80" style={{ background: 'var(--accent)', color: '#1a1910' }}>
-            Create your free account <ArrowRight size={16} />
+          <Link href="/dashboard" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-base transition-opacity hover:opacity-80" style={{ background: 'var(--accent)', color: '#1a1910' }}>
+            Launch teamflix <ArrowRight size={16} />
           </Link>
         </div>
       </section>

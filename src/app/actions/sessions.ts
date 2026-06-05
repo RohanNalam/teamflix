@@ -1,26 +1,22 @@
 'use server'
 
 import { supabase } from '@/lib/supabase'
-import { auth } from '@clerk/nextjs/server'
+import { DEMO_USER_ID } from '@/lib/demo-user'
 import { revalidatePath } from 'next/cache'
 
 export async function getSessions() {
-  const { userId } = await auth()
-  if (!userId) return []
   const { data } = await supabase
     .from('sessions')
     .select('*')
-    .eq('user_id', userId)
+    .eq('user_id', DEMO_USER_ID)
     .order('created_at', { ascending: false })
   return data ?? []
 }
 
 export async function createSession(name: string, agent: string, repo: string) {
-  const { userId } = await auth()
-  if (!userId) return
-  await supabase.from('sessions').insert({ user_id: userId, name, agent, repo, status: 'idle' })
+  await supabase.from('sessions').insert({ user_id: DEMO_USER_ID, name, agent, repo, status: 'idle' })
   await supabase.from('activity').insert({
-    user_id: userId, type: 'run',
+    user_id: DEMO_USER_ID, type: 'run',
     message: `Session started: ${name}`, session: name, agent
   })
   revalidatePath('/dashboard/sessions')
@@ -28,11 +24,9 @@ export async function createSession(name: string, agent: string, repo: string) {
 }
 
 export async function deleteSession(id: string, name: string) {
-  const { userId } = await auth()
-  if (!userId) return
-  await supabase.from('sessions').delete().eq('id', id).eq('user_id', userId)
+  await supabase.from('sessions').delete().eq('id', id).eq('user_id', DEMO_USER_ID)
   await supabase.from('activity').insert({
-    user_id: userId, type: 'run',
+    user_id: DEMO_USER_ID, type: 'run',
     message: `Session deleted: ${name}`, session: name
   })
   revalidatePath('/dashboard/sessions')
@@ -40,8 +34,6 @@ export async function deleteSession(id: string, name: string) {
 }
 
 export async function updateSessionStatus(id: string, status: string, name: string) {
-  const { userId } = await auth()
-  if (!userId) return
-  await supabase.from('sessions').update({ status }).eq('id', id).eq('user_id', userId)
+  await supabase.from('sessions').update({ status }).eq('id', id).eq('user_id', DEMO_USER_ID)
   revalidatePath('/dashboard/sessions')
 }

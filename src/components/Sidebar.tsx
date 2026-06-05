@@ -2,7 +2,6 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useUser, useClerk } from '@clerk/nextjs'
 import {
   Layers, Bot, Compass, Activity, Shield,
   AlignJustify, Key, Plug, Settings, Plus,
@@ -33,28 +32,24 @@ const nav = [
 
 export default function Sidebar() {
   const pathname = usePathname()
-  const { user } = useUser()
-  const { signOut } = useClerk()
   const [menuOpen, setMenuOpen] = useState(false)
-
-  const initials = user?.firstName?.[0] ?? user?.emailAddresses?.[0]?.emailAddress?.[0]?.toUpperCase() ?? '?'
-  const displayName = user?.fullName ?? user?.emailAddresses?.[0]?.emailAddress ?? 'User'
-  const email = user?.emailAddresses?.[0]?.emailAddress ?? ''
 
   return (
     <aside className="flex flex-col h-screen border-r" style={{ width: 220, background: 'var(--surface)', borderColor: 'var(--border)', flexShrink: 0 }}>
       {/* Logo */}
       <div className="flex items-center gap-3 px-5 py-5 border-b" style={{ borderColor: 'var(--border)' }}>
-        <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'var(--accent)', }}>
-          <Tv2 size={15} color="#1a1910" />
-        </div>
-        <span className="font-bold text-base tracking-tight" style={{ color: 'var(--foreground)' }}>teamflix</span>
+        <Link href="/dashboard" className="flex items-center gap-3">
+          <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'var(--accent)' }}>
+            <Tv2 size={15} color="#1a1910" />
+          </div>
+          <span className="font-bold text-base tracking-tight" style={{ color: 'var(--foreground)' }}>teamflix</span>
+        </Link>
       </div>
 
       {/* New Session */}
       <div className="px-4 py-4 border-b" style={{ borderColor: 'var(--border)' }}>
         <Link
-          href="/dashboard/sessions"
+          href="/dashboard"
           className="flex items-center justify-center gap-2 w-full py-2 rounded-lg font-semibold text-sm transition-opacity hover:opacity-80"
           style={{ background: 'var(--accent)', color: '#1a1910' }}
         >
@@ -100,23 +95,19 @@ export default function Sidebar() {
               Settings
             </Link>
             <div style={{ borderTop: '1px solid var(--border)' }} />
-            <button onClick={() => signOut({ redirectUrl: '/' })} className="w-full flex items-center gap-3 px-4 py-3 text-sm font-medium hover:bg-red-900/20 transition-colors" style={{ color: '#ef4444' }}>
+            <Link href="/" className="flex items-center gap-3 px-4 py-3 text-sm font-medium hover:bg-red-900/20 transition-colors" style={{ color: '#ef4444' }}>
               <LogOut size={14} />
               Sign out
-            </button>
+            </Link>
           </div>
         )}
         <button onClick={() => setMenuOpen(o => !o)} className="w-full flex items-center gap-3 px-4 py-4 hover:bg-white/5 transition-colors">
-          {user?.imageUrl ? (
-            <img src={user.imageUrl} alt="" className="w-8 h-8 rounded-full object-cover flex-shrink-0" />
-          ) : (
-            <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0" style={{ background: 'var(--accent)', color: '#1a1910' }}>
-              {initials}
-            </div>
-          )}
+          <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0" style={{ background: 'var(--accent)', color: '#1a1910' }}>
+            R
+          </div>
           <div className="flex-1 text-left min-w-0">
-            <p className="text-sm font-semibold truncate" style={{ color: 'var(--foreground)' }}>{displayName}</p>
-            <p className="text-xs truncate mt-0.5" style={{ color: 'var(--muted)' }}>{email}</p>
+            <p className="text-sm font-semibold truncate" style={{ color: 'var(--foreground)' }}>Rohan Nalam</p>
+            <p className="text-xs truncate mt-0.5" style={{ color: 'var(--muted)' }}>rohannalam1@gmail.com</p>
           </div>
           <ChevronDown size={13} style={{ color: 'var(--muted)' }} />
         </button>

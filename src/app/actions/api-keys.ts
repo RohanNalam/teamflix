@@ -1,7 +1,7 @@
 'use server'
 
 import { supabase } from '@/lib/supabase'
-import { auth } from '@clerk/nextjs/server'
+import { DEMO_USER_ID } from '@/lib/demo-user'
 import { revalidatePath } from 'next/cache'
 
 function generateKey(type: 'live' | 'test') {
@@ -11,27 +11,21 @@ function generateKey(type: 'live' | 'test') {
 }
 
 export async function getApiKeys() {
-  const { userId } = await auth()
-  if (!userId) return []
   const { data } = await supabase
     .from('api_keys')
     .select('*')
-    .eq('user_id', userId)
+    .eq('user_id', DEMO_USER_ID)
     .order('created_at', { ascending: false })
   return data ?? []
 }
 
 export async function createApiKey(name: string, type: 'live' | 'test' = 'test') {
-  const { userId } = await auth()
-  if (!userId) return
   const key = generateKey(type)
-  await supabase.from('api_keys').insert({ user_id: userId, name, key, type })
+  await supabase.from('api_keys').insert({ user_id: DEMO_USER_ID, name, key, type })
   revalidatePath('/dashboard/api-keys')
 }
 
 export async function deleteApiKey(id: string) {
-  const { userId } = await auth()
-  if (!userId) return
-  await supabase.from('api_keys').delete().eq('id', id).eq('user_id', userId)
+  await supabase.from('api_keys').delete().eq('id', id).eq('user_id', DEMO_USER_ID)
   revalidatePath('/dashboard/api-keys')
 }
