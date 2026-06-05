@@ -13,14 +13,21 @@ export async function getSessions() {
   return data ?? []
 }
 
-export async function createSession(name: string, agent: string, repo: string) {
-  await supabase.from('sessions').insert({ user_id: DEMO_USER_ID, name, agent, repo, status: 'idle' })
+export async function createSession(name: string, agent: string, repo: string, prompt?: string) {
+  const { data, error } = await supabase
+    .from('sessions')
+    .insert({ user_id: DEMO_USER_ID, name, agent, repo, status: 'active', prompt: prompt || name })
+    .select()
+    .single()
+
   await supabase.from('activity').insert({
     user_id: DEMO_USER_ID, type: 'run',
     message: `Session started: ${name}`, session: name, agent
   })
+
   revalidatePath('/dashboard/sessions')
   revalidatePath('/dashboard/activity')
+  return data
 }
 
 export async function deleteSession(id: string, name: string) {

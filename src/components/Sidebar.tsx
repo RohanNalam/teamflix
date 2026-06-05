@@ -38,7 +38,7 @@ export default function Sidebar() {
     <aside className="flex flex-col h-screen border-r" style={{ width: 220, background: 'var(--surface)', borderColor: 'var(--border)', flexShrink: 0 }}>
       {/* Logo */}
       <div className="flex items-center gap-3 px-5 py-5 border-b" style={{ borderColor: 'var(--border)' }}>
-        <Link href="/dashboard" className="flex items-center gap-3">
+        <Link href="/" className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'var(--accent)' }}>
             <Tv2 size={15} color="#1a1910" />
           </div>

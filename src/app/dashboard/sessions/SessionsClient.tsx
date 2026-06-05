@@ -90,7 +90,7 @@ export default function SessionsClient({ initialSessions }: { initialSessions: a
               {filtered.map((s, i) => {
                 const st = statusStyles[s.status] ?? statusStyles.idle
                 return (
-                  <tr key={s.id} className="hover:bg-white/3 transition-colors" style={i < filtered.length - 1 ? { borderBottom: '1px solid var(--border)' } : {}}>
+                  <tr key={s.id} onClick={() => window.location.href = `/dashboard/sessions/${s.id}`} className="hover:bg-white/3 transition-colors cursor-pointer" style={i < filtered.length - 1 ? { borderBottom: '1px solid var(--border)' } : {}}>
                     <td className="px-5 py-4">
                       <div className="flex items-center gap-2.5">
                         <Terminal size={14} style={{ color: 'var(--muted)' }} />

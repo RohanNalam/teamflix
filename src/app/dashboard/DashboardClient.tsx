@@ -36,11 +36,14 @@ export default function DashboardClient({ firstName, sessionCount, agentCount }:
 
   const handleSubmit = () => {
     if (!prompt.trim()) return
-    const sessionName = prompt.trim().toLowerCase().replace(/\s+/g, '-').slice(0, 40)
+    const sessionName = prompt.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 40).replace(/-$/, '')
     startTransition(async () => {
-      await createSession(sessionName, selectedAgent, '')
-      toast(`Session "${sessionName}" created`)
-      router.push('/dashboard/sessions')
+      const session = await createSession(sessionName, selectedAgent, '', prompt.trim())
+      if (session?.id) {
+        router.push(`/dashboard/sessions/${session.id}`)
+      } else {
+        router.push('/dashboard/sessions')
+      }
     })
   }
 
