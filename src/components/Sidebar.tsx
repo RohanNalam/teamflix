@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation'
 import {
   Layers, Bot, Compass, Activity, Shield,
   AlignJustify, Key, Plug, Settings, Plus,
-  Tv2, LogOut, ChevronDown,
+  Tv2, ChevronDown,
 } from 'lucide-react'
 import clsx from 'clsx'
 import { useState } from 'react'
@@ -94,20 +94,15 @@ export default function Sidebar() {
               <Settings size={14} style={{ color: 'var(--muted)' }} />
               Settings
             </Link>
-            <div style={{ borderTop: '1px solid var(--border)' }} />
-            <Link href="/" className="flex items-center gap-3 px-4 py-3 text-sm font-medium hover:bg-red-900/20 transition-colors" style={{ color: '#ef4444' }}>
-              <LogOut size={14} />
-              Sign out
-            </Link>
           </div>
         )}
         <button onClick={() => setMenuOpen(o => !o)} className="w-full flex items-center gap-3 px-4 py-4 hover:bg-white/5 transition-colors">
-          <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0" style={{ background: 'var(--accent)', color: '#1a1910' }}>
-            R
+          <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0" style={{ background: 'var(--surface-2)', border: '1px solid var(--border)', color: 'var(--muted)' }}>
+            <Settings size={14} />
           </div>
           <div className="flex-1 text-left min-w-0">
-            <p className="text-sm font-semibold truncate" style={{ color: 'var(--foreground)' }}>Rohan Nalam</p>
-            <p className="text-xs truncate mt-0.5" style={{ color: 'var(--muted)' }}>rohannalam1@gmail.com</p>
+            <p className="text-sm font-semibold truncate" style={{ color: 'var(--foreground)' }}>My Workspace</p>
+            <p className="text-xs truncate mt-0.5" style={{ color: 'var(--muted)' }}>Personal</p>
           </div>
           <ChevronDown size={13} style={{ color: 'var(--muted)' }} />
         </button>
