@@ -86,15 +86,15 @@ export default function SessionView({ sessionId }: { sessionId: string }) {
 
   useEffect(() => {
     async function load() {
-      const { data } = await supabase.from('sessions').select('*').eq('id', sessionId).eq('user_id', DEMO_USER_ID).single()
+      const { data, error } = await supabase.from('sessions').select('*').eq('id', sessionId).single()
       if (data) {
         setSession(data)
-        setPrompt(data.prompt || data.name)
-        if (data.prompt) {
-          await runAgent(data.prompt, data.agent, true)
-        } else {
-          await runAgent(data.name, data.agent, true)
-        }
+        const userPrompt = data.prompt || data.name
+        setPrompt(userPrompt)
+        await runAgent(userPrompt, data.agent, true)
+      } else {
+        console.error('Could not load session:', error)
+        setStatus('error')
       }
     }
     load()

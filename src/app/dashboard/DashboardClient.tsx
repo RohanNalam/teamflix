@@ -3,7 +3,8 @@
 import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { ArrowUp, GitBranch, Layers, Globe, Code2, Zap, Database, LayoutDashboard, Loader2 } from 'lucide-react'
-import { createSession } from '@/app/actions/sessions'
+import { supabase } from '@/lib/supabase'
+import { DEMO_USER_ID } from '@/lib/demo-user'
 
 const QUICK_PROMPTS = [
   { icon: Globe, label: 'Build a landing page' },
@@ -37,13 +38,27 @@ export default function DashboardClient({ firstName, sessionCount, agentCount }:
     setLoading(true)
     try {
       const sessionName = prompt.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 40).replace(/-$/, '')
-      const session = await createSession(sessionName, selectedAgent, '', prompt.trim())
-      if (session?.id) {
-        router.push(`/dashboard/sessions/${session.id}`)
+      const { data, error } = await supabase
+        .from('sessions')
+        .insert({
+          user_id: DEMO_USER_ID,
+          name: sessionName,
+          agent: selectedAgent,
+          repo: '',
+          status: 'active',
+          prompt: prompt.trim(),
+        })
+        .select()
+        .single()
+
+      if (data?.id) {
+        router.push(`/dashboard/sessions/${data.id}`)
       } else {
-        router.push('/dashboard/sessions')
+        console.error('Session creation failed:', error)
+        setLoading(false)
       }
     } catch (e) {
+      console.error(e)
       setLoading(false)
     }
   }
