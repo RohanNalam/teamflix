@@ -10,7 +10,7 @@ const features = [
 
 const agents = ['Claude Code', 'Cursor', 'OpenAI Codex', 'GitHub Copilot', 'Gemini CLI', 'Devin']
 
-const perks = ['No infrastructure to manage', 'Works with your existing repos', 'Free to start', 'Deploys in minutes']
+const perks = ['No infrastructure to manage', 'Works with your existing repos', 'No credit card required', 'Up and running in minutes']
 
 export default function LandingPage() {
   return (
@@ -27,8 +27,7 @@ export default function LandingPage() {
           </div>
           <div className="hidden md:flex items-center gap-8 text-sm font-medium" style={{ color: 'var(--muted)' }}>
             <Link href="#features" className="hover:text-[#FDFBD4] transition-colors">Features</Link>
-            <Link href="#agents" className="hover:text-[#FDFBD4] transition-colors">Agents</Link>
-            <Link href="#pricing" className="hover:text-[#FDFBD4] transition-colors">Pricing</Link>
+            <Link href="#agents" className="hover:text-[#FDFBD4] transition-colors">Integrations</Link>
           </div>
           <div className="flex items-center gap-3">
             <Link href="/sign-in" className="text-sm font-medium px-4 py-2 rounded-lg border hover:bg-white/5 transition-colors" style={{ borderColor: 'var(--border)', color: 'var(--muted)' }}>
@@ -43,10 +42,6 @@ export default function LandingPage() {
 
       {/* Hero */}
       <section className="max-w-6xl mx-auto px-6 pt-28 pb-20 text-center">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium mb-10" style={{ background: 'var(--accent-dim)', color: 'var(--accent)', border: '1px solid var(--border)' }}>
-          <span className="w-2 h-2 rounded-full" style={{ background: 'var(--accent)' }} />
-          Now in beta — free for early teams
-        </div>
         <h1 className="font-bold leading-none mb-6" style={{ fontSize: 'clamp(48px, 7vw, 80px)', letterSpacing: '-2px', color: 'var(--foreground)' }}>
           Ship faster with<br />
           <span style={{ color: 'var(--accent)' }}>AI on your team</span>
@@ -56,10 +51,10 @@ export default function LandingPage() {
         </p>
         <div className="flex items-center justify-center gap-4 flex-wrap mb-10">
           <Link href="/sign-up" className="flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-base transition-opacity hover:opacity-80" style={{ background: 'var(--accent)', color: '#1a1910' }}>
-            Start building free <ArrowRight size={16} />
+            Get started <ArrowRight size={16} />
           </Link>
-          <Link href="/dashboard" className="flex items-center gap-2 px-7 py-3.5 rounded-xl font-medium text-base border hover:bg-white/5 transition-colors" style={{ borderColor: 'var(--border)', color: 'var(--muted)' }}>
-            View demo
+          <Link href="/sign-in" className="flex items-center gap-2 px-7 py-3.5 rounded-xl font-medium text-base border hover:bg-white/5 transition-colors" style={{ borderColor: 'var(--border)', color: 'var(--muted)' }}>
+            Sign in
           </Link>
         </div>
         <div className="flex items-center justify-center gap-6 flex-wrap">
@@ -106,14 +101,11 @@ export default function LandingPage() {
       {/* CTA */}
       <section id="pricing" className="max-w-6xl mx-auto px-6 pb-28">
         <div className="rounded-3xl p-14 text-center border" style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}>
-          <div className="inline-block px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-6" style={{ background: 'var(--accent-dim)', color: 'var(--accent)', border: '1px solid var(--border)' }}>
-            Free forever for small teams
-          </div>
           <h2 className="text-4xl font-bold mb-4" style={{ letterSpacing: '-1px', color: 'var(--foreground)' }}>
             Your team deserves<br />better tools
           </h2>
           <p className="text-base mb-10 max-w-md mx-auto" style={{ color: 'var(--muted)' }}>
-            Sign up today and get unlimited sessions, 3 agents, and full observability — no credit card needed.
+            Create an account and start running AI agents across your team today. No credit card required.
           </p>
           <Link href="/sign-up" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-base transition-opacity hover:opacity-80" style={{ background: 'var(--accent)', color: '#1a1910' }}>
             Create your free account <ArrowRight size={16} />
@@ -130,7 +122,7 @@ export default function LandingPage() {
             </div>
             <span className="font-bold text-sm" style={{ color: 'var(--foreground)' }}>teamflix</span>
           </div>
-          <p className="text-xs" style={{ color: 'var(--muted)' }}>© 2026 Teamflix. All rights reserved.</p>
+          <p className="text-xs" style={{ color: 'var(--muted)' }}>© {new Date().getFullYear()} Teamflix.</p>
         </div>
       </footer>
     </div>

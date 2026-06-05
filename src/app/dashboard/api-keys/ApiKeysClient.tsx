@@ -109,11 +109,10 @@ export default function ApiKeysClient({ initialKeys }: { initialKeys: any[] }) {
 
       {/* API docs box */}
       <div className="rounded-2xl border p-5" style={{ borderColor: 'var(--border)', background: 'var(--surface)' }}>
-        <h3 className="text-sm font-bold mb-2" style={{ color: 'var(--foreground)' }}>Using the API</h3>
-        <p className="text-xs mb-3" style={{ color: 'var(--muted)' }}>Pass your key as a Bearer token in the Authorization header:</p>
+        <h3 className="text-sm font-bold mb-2" style={{ color: 'var(--foreground)' }}>Using API Keys</h3>
+        <p className="text-xs mb-3" style={{ color: 'var(--muted)' }}>Pass your key as a Bearer token when authenticating requests from your applications.</p>
         <pre className="text-xs rounded-xl p-4 overflow-x-auto font-mono" style={{ background: 'var(--surface-2)', color: 'var(--accent)' }}>
-{`curl https://api.teamflix.dev/v1/sessions \\
-  -H "Authorization: Bearer tf_live_..."`}
+{`Authorization: Bearer tf_live_xxxxxxxxxxxxxxxxxxxxxxxx`}
         </pre>
       </div>
 
