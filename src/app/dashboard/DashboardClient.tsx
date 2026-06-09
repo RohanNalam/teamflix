@@ -140,10 +140,8 @@ export default function DashboardClient({ firstName: _firstName, sessionCount: _
 
       {/* Main prompt box */}
       <div
-        className="w-full max-w-2xl rounded-2xl overflow-hidden mb-4 relative z-10 animate-border-glow"
+        className="w-full max-w-2xl rounded-2xl overflow-hidden mb-4 relative z-10 gradient-border"
         style={{
-          background: 'var(--surface)',
-          border: '1px solid var(--border)',
           boxShadow: prompt ? '0 0 40px rgba(217,215,182,0.07), 0 8px 40px rgba(0,0,0,0.4)' : '0 8px 40px rgba(0,0,0,0.3)',
           transition: 'box-shadow 0.3s ease',
         }}
@@ -175,8 +173,8 @@ export default function DashboardClient({ firstName: _firstName, sessionCount: _
             <button
               onClick={handleSubmit}
               disabled={!prompt.trim() || loading}
-              className="w-8 h-8 rounded-xl flex items-center justify-center transition-all hover:scale-110 hover:opacity-90 disabled:opacity-30 disabled:scale-100"
-              style={{ background: 'var(--accent)', boxShadow: prompt ? '0 0 16px rgba(217,215,182,0.3)' : 'none' }}
+              className="btn-primary w-8 h-8 rounded-xl flex items-center justify-center disabled:opacity-30"
+              style={{ boxShadow: prompt ? '0 0 16px rgba(217,215,182,0.3)' : 'none' }}
             >
               {loading
                 ? <Loader2 size={14} color="#1a1910" className="animate-spin" />
